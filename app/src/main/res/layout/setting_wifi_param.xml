@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wifi名称"
+        android:textColor="@color/color_grey"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_wifi_ssid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/color_black"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="信号强度"
+        android:textColor="@color/color_grey"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_wifi_signal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/color_black"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="安全性"
+        android:textColor="@color/color_grey"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_wifi_sec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/color_black"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="密码"
+        android:textColor="@color/color_grey"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_wifi_pwd"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            />
+
+        <com.github.glomadrian.materialanimatedswitch.MaterialAnimatedSwitch
+            android:id="@+id/switch_lock_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ball_press_color="#FF5722"
+            app:ball_release_color="#259B24"
+            app:base_press_color="#FF5722"
+            app:base_release_color="#259B24"
+            app:icon_press="@drawable/ic_lock_open_white_24dp"
+            app:icon_release="@drawable/ic_lock_outline_white_24dp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

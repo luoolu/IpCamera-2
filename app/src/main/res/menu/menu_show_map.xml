@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/camera_list"
+        android:icon="@drawable/ic_view_list_white"
+        android:title="摄像头列表"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/refresh_map"
+        android:icon="@drawable/ic_settings_white"
+        android:title="更新方式"
+        app:showAsAction="always"/>
+
+</menu>

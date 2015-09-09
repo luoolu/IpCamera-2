@@ -1,0 +1,52 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/nav_play"
+            android:checkable="true"
+            android:icon="@drawable/ic_play_arrow"
+            android:title="@string/play" />
+        <item
+            android:id="@+id/nav_local_video"
+            android:checkable="true"
+            android:icon="@drawable/ic_airplay"
+            android:title="@string/local_video" />
+        <item
+            android:id="@+id/play_back"
+            android:icon="@drawable/ic_videocam"
+            android:checkable="true"
+            android:title="@string/playback" />
+    </group>
+
+    <item
+        android:title="@string/system_setting">
+        <menu>
+            <item
+                android:id="@+id/nav_wifi_setting"
+                android:icon="@drawable/ic_wifi"
+                android:checkable="true"
+                android:title="@string/wifi_setting" />
+            <item
+                android:id="@+id/nav_change_info"
+                android:icon="@drawable/ic_lock_open"
+                android:checkable="true"
+                android:title="@string/change_info" />
+            <item
+                android:id="@+id/alert_setting"
+                android:icon="@drawable/ic_add_alert"
+                android:checkable="true"
+                android:title="@string/alert_setting" />
+            <item
+                android:id="@+id/time_setting"
+                android:icon="@drawable/ic_access_time"
+                android:checkable="true"
+                android:title="@string/time_setting" />
+            <item
+                android:id="@+id/sdcard_setting"
+                android:icon="@drawable/ic_sd_card"
+                android:checkable="true"
+                android:title="@string/sdcard_setting" />
+        </menu>
+    </item>
+
+</menu>
