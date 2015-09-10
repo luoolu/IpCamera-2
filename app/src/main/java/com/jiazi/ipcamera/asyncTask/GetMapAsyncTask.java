@@ -55,6 +55,8 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
     private List<CameraBean> mCameraBeanList;
     private List<BluetoothdeviceBean> mBluetoothdeviceBeanList;
     private List<BluetoothdeviceBean> mAlarmdeviceBeanList;
+    private ArrayList<Integer> xPositions;
+    private ArrayList<Integer> yPositions;
     private LinearLayout mLinearLayout;
     private int topPos;
     private int bottomPos;
@@ -81,6 +83,8 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
         mBluetoothdeviceBeanList = new ArrayList<BluetoothdeviceBean>();
         mAlarmdeviceBeanList = new ArrayList<BluetoothdeviceBean>();
         mCameraBeanList = new ArrayList<CameraBean>();
+        xPositions = new ArrayList<Integer>();
+        yPositions = new ArrayList<Integer>();
         getBluetoothdevicePos(webUrl);            //后台进程连接服务器并且读取蓝牙设备信息
         String path = Environment.getExternalStorageDirectory().getPath();
         String filename = path + "/ipcamera/map/map.jpg";
@@ -108,7 +112,10 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
             mImageView.setImageBitmap(bitmap);
             getImagePos(bitmap.getWidth(), bitmap.getHeight());
             Bitmap bmp = null;
-            mCameraBeanList = CameraManager.getInstance(mActivity).getCameras();
+            bmp = bitmap.copy(Bitmap.Config.ARGB_8888, true);             //画布不允许直接修改图片,所以要先copy
+            Canvas canvas = new Canvas(bmp);
+            drawBluetoothDevice(canvas);
+            mCameraBeanList = CameraManager.getInstance(mActivity).getCameras();  //取得摄像头的数目
             if (mCameraBeanList.size() != 0) {
                 for (int i = 0; i < mCameraBeanList.size(); i++) {
                     CameraBean camera = mCameraBeanList.get(i);
@@ -116,19 +123,10 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
                     float xStop = camera.getxStop();
                     float yStart = camera.getyStart();
                     float yStop = camera.getyStop();
-                    if (i == 0) {
-                        bmp = drawMap(bitmap, xStart, xStop, yStart, yStop);
-                    } else {
-                        bmp = drawMap(bmp, xStart, xStop, yStart, yStop);
-                    }
+                    bmp = drawMap(bmp, xStart, xStop, yStart, yStop);
                 }
-                mImageView.setImageBitmap(bmp);
-            } else {
-                bmp = bitmap.copy(Bitmap.Config.ARGB_8888, true);             //画布不允许直接修改图片,所以要先copy
-                Canvas canvas = new Canvas(bmp);
-                drawBluetoothDevice(canvas);
-                mImageView.setImageBitmap(bmp);
             }
+            mImageView.setImageBitmap(bmp);                              //设置图片
             if (mDialog != null) {
                 mDialog.dismiss();
             }
@@ -169,9 +167,6 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
             canvas.drawRect(new Rect(xStartLoc, yStartLoc, xStopLoc, yStopLoc), rectPaint);      //绘制矩形
         }
 
-
-        drawBluetoothDevice(canvas);
-
         /**
          * 数据返回给ShowMapActivity做触摸判断
          */
@@ -209,9 +204,11 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
         } else if (type.equals("良好")) {
             cirPaint.setColor(Color.GREEN);
         }
-
+        xPoint = checkOverlay(xPoint, yPoint);
         cirPaint.setAntiAlias(true);     // 去除画笔的锯齿效果
         canvas.drawCircle(xPoint, yPoint, 15, cirPaint);    // 小圆
+        xPositions.add(xPoint);
+        yPositions.add(yPoint);
 
         /**
          * 绘制蓝牙设备的id文本
@@ -270,6 +267,26 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
         }
     }
 
+    /**
+     * 检查蓝牙设备是否重叠
+     */
+    private int checkOverlay(int x, int y) {
+        for (int i = 0; i < xPositions.size(); i++) {
+            int xPosition = xPositions.get(i);
+            int yPosition = yPositions.get(i);
+            int x1 = Math.abs(xPosition - x);       //两点之间x坐标差值
+            int y1 = Math.abs(yPosition - y);       //两点之间y坐标差值
+            double distance = Math.sqrt(x1 * x1 + y1 * y1);      //两点之间的距离
+            if (distance < 30) {
+                if (x - xPosition > 0) {
+                    x = x + 30;
+                } else {
+                    x = x - 30;
+                }
+            }
+        }
+        return x;
+    }
 
     private void showConfirmDialog(final CameraBean camera) {
         ShowMapActivity.isShowing = true;

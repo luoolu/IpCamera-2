@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -80,7 +82,6 @@ public class CameraListActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);    // 设置固定大小
 
         mCameraManager = CameraManager.getInstance(this);
-
         mReceiver = new UpdateReceiver();
 
     }
@@ -111,7 +112,6 @@ public class CameraListActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -134,11 +134,20 @@ public class CameraListActivity extends AppCompatActivity {
     public class UpdateReceiver extends BroadcastReceiver {
 
         public void onReceive(Context context, Intent intent) {
+            Message msg = new Message();
+            mHandler.sendMessage(msg);
+        }
+    }
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
             DeviceAlarmAsyncTask deviceAlarmAsyncTask = new DeviceAlarmAsyncTask(AlarmUrl, mContext, mCameraManager,
                     mCoordinatorLayout, mRecyclerView, isTipFirstOpen, isFirstAlarm, mAlarmManagerUtil);
             deviceAlarmAsyncTask.execute();
         }
-    }
+    };
 
 
 }

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.jiazi.ipcamera.R;
+import com.jiazi.ipcamera.activity.AboutActivity;
 import com.jiazi.ipcamera.activity.DownloadActivity;
 import com.jiazi.ipcamera.bean.AppBean;
 import com.jiazi.ipcamera.service.DownloadService;
@@ -117,6 +118,10 @@ public class UpdateAsyncTask extends AsyncTask<String, Void, String> {
                     case 103:
                         Toast.makeText(mActivity, "获取版本信息失败", Toast.LENGTH_SHORT).show();
                         break;
+                    case 105:                         //当前版本已为最新
+                        if (mActivity instanceof AboutActivity) {
+                            Toast.makeText(mActivity, "当前版本已为最新版本", Toast.LENGTH_SHORT).show();
+                        }
                     default:
                         break;
                 }

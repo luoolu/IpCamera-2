@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -15,8 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.jiazi.ipcamera.fragment.CameraFragment;
 import com.jiazi.ipcamera.R;
+import com.jiazi.ipcamera.fragment.CameraFragment;
 import com.jiazi.ipcamera.utils.ContentCommon;
 import com.jiazi.ipcamera.utils.SystemValue;
 
@@ -25,7 +24,6 @@ import com.jiazi.ipcamera.utils.SystemValue;
  */
 public class CameraActivity extends AppCompatActivity {
 
-    private CoordinatorLayout mCoordinatorLayout;
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolBar;
     private NavigationView mNavigationView;
@@ -39,7 +37,6 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_camera);
-        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_start);
 
         mCameraFragment = new CameraFragment();
         FragmentManager mFragmentManager = getSupportFragmentManager();
@@ -199,10 +196,5 @@ public class CameraActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

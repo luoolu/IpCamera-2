@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -23,11 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.jiazi.ipcamera.R;
 import com.jiazi.ipcamera.activity.AddCameraActivity;
 import com.jiazi.ipcamera.activity.PlayActivity;
 import com.jiazi.ipcamera.asyncTask.DevicePosAsyncTask;
 import com.jiazi.ipcamera.bean.CameraBean;
-import com.jiazi.ipcamera.R;
 import com.jiazi.ipcamera.service.BridgeService;
 import com.jiazi.ipcamera.utils.CameraManager;
 import com.jiazi.ipcamera.utils.ContentCommon;
@@ -46,7 +45,6 @@ public class CameraFragment extends Fragment implements BridgeService.IpcamClien
 
     public static final String WEBSITE = "http://test.jiazi-it.com/spyscan/index.php?m=Home&c=MonitorApi&a=getAllCoord&token=96f86412b37fe9665c5ec4c3fad04f0f";
 
-    private CoordinatorLayout mCoordinatorLayout;
     private TextView uidText;
     private EditText nameText;
     private ImageView video_pic;
@@ -74,7 +72,6 @@ public class CameraFragment extends Fragment implements BridgeService.IpcamClien
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_camera, container, false);
-        mCoordinatorLayout = (CoordinatorLayout) v.findViewById(R.id.frag_container);
         uidText = (TextView) v.findViewById(R.id.frag_tv_dev_uid);
         nameText = (EditText) v.findViewById(R.id.frag_tv_dev_name);
         video_pic = (ImageView) v.findViewById(R.id.frag_image_camera);
@@ -217,6 +214,7 @@ public class CameraFragment extends Fragment implements BridgeService.IpcamClien
             try {
                 Thread.sleep(100);
                 startCameraPPPP();
+                Log.i("CameraFragment","startCameraPPPP");
             } catch (Exception e) {
 
             }

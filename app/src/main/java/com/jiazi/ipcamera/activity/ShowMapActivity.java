@@ -26,7 +26,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.jiazi.ipcamera.R;
 import com.jiazi.ipcamera.asyncTask.SavePosAsyncTask;
 import com.jiazi.ipcamera.asyncTask.UpdateAsyncTask;
-import com.jiazi.ipcamera.bean.BluetoothdeviceBean;
 import com.jiazi.ipcamera.bean.CameraBean;
 import com.jiazi.ipcamera.customView.ScaleImageView;
 import com.jiazi.ipcamera.fragment.CameraFragment;
@@ -59,7 +58,6 @@ public class ShowMapActivity extends AppCompatActivity {
     private Toolbar mToolBar;
     private LinearLayout listLinearLayout;
     private ListView mDeviceLv;
-    private ArrayList<BluetoothdeviceBean> devices;
 
     private int isAuto = 1;      //0为手动更新    1为自动更新
     public static boolean isShowing = false;         //没有警告框
@@ -90,8 +88,8 @@ public class ShowMapActivity extends AppCompatActivity {
         mAlarmManagerUtil = new AlarmManagerUtil(BROADCAST_MAP);
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar_start);
-        setSupportActionBar(mToolBar);           //设置ToolBar为ActionBar
         mToolBar.setTitle("甲子中心");
+        setSupportActionBar(mToolBar);           //设置ToolBar为ActionBar
 
         listLinearLayout = (LinearLayout) findViewById(R.id.ll_list);
         mDeviceLv = (ListView) findViewById(R.id.lv_deviceinfo);
@@ -163,8 +161,9 @@ public class ShowMapActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initReceiver();
         mCameraManager = CameraManager.getInstance(this);
+        loadPicture();                //接收到广播后加载手环地图
+        initReceiver();
         mCameraList = mCameraManager.getCameras();
         if (isAuto == 1) {
             mAlarmManagerUtil.sendUpdateBroadcast(this);
@@ -326,6 +325,9 @@ public class ShowMapActivity extends AppCompatActivity {
             startActivity(intent);
         } else if (i == R.id.refresh_map) {
             showChooseDialog();
+        } else if (i == R.id.about_us) {
+            Intent intent = new Intent(ShowMapActivity.this, AboutActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

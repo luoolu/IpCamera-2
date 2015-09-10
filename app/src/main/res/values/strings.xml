@@ -237,5 +237,6 @@
     <string name="other_way">其它方式</string>
     <string name="login">登录</string>
     <string name="title_activity_download">DownloadActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
 
 </resources>
