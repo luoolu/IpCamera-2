@@ -61,6 +61,9 @@ public class UpdateLogUtils {
                 break;
             case 181:
                 versionName = "Version 1.8.1";
+                break;
+            case 182:
+                versionName = "Version 1.8.2";
             default:
                 break;
         }
@@ -79,6 +82,11 @@ public class UpdateLogUtils {
                 updateLog = "1.优化蓝牙设备的显示\n" +
                         "2.增添查看更新日志功能\n" +
                         "3.可以在应用里面查看更新\n";
+                break;
+            case 182:
+                updateLog = "1.更新完显示更新日志\n" +
+                        "2.增添意见反馈功能\n" +
+                        "3.一些UI变化及BUG修复\n";
             default:
                 break;
         }
