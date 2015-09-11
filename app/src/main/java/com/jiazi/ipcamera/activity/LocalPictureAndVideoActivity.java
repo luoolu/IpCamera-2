@@ -44,7 +44,6 @@ public class LocalPictureAndVideoActivity extends Activity implements
     private TextView tvCameraName;
     private TextView tvEmpty;
     private ImageButton back;
-    private boolean isFirstStart = false;
     private LocalPictureAndVideoAdapter mAdapter;
     private ArrayList<MyItem> items;
 

@@ -50,7 +50,7 @@ public class DevicePosAsyncTask extends AsyncTask<String, Void, String[]> {
 
     @Override
     protected String[] doInBackground(String... strings) {
-        String result = HttpUtil.connect(website);
+        String result = HttpUtil.getData(website);
         JSONObject object;
         if (result != null) {
             try {

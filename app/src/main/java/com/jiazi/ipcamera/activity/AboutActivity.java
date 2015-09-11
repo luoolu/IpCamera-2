@@ -7,13 +7,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jiazi.ipcamera.R;
+import com.jiazi.ipcamera.asyncTask.FeedbackAsyncTask;
 import com.jiazi.ipcamera.asyncTask.UpdateAsyncTask;
 import com.jiazi.ipcamera.utils.UpdateLogUtils;
 
@@ -23,6 +28,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     private LinearLayout webLinearLayout;
     private LinearLayout logLinearLayout;
     private LinearLayout updateLinearLayout;
+    private LinearLayout feedbackLinearLayout;
     private TextView versionTv;
     private String versionCode;
 
@@ -36,6 +42,8 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         webLinearLayout.setOnClickListener(this);
         updateLinearLayout = (LinearLayout) findViewById(R.id.ll_update_version);
         updateLinearLayout.setOnClickListener(this);
+        feedbackLinearLayout = (LinearLayout) findViewById(R.id.ll_feedback);
+        feedbackLinearLayout.setOnClickListener(this);
         versionTv = (TextView) findViewById(R.id.tv_app_version);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_about);
         mToolbar.setTitle("关于");                                         //设置toolbar的标题
@@ -96,8 +104,33 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(this);
                 updateAsyncTask.execute();
                 break;
+            case R.id.ll_feedback:
+                showFeedbackDialog();
             default:
                 break;
         }
+    }
+
+    /**
+     * 显示添加反馈信息的对话框
+     */
+    private void showFeedbackDialog() {
+        new MaterialDialog.Builder(this)
+                .title("意见反馈")
+                .content("提交bug或者提出新功能建议")
+                .inputType(InputType.TYPE_CLASS_TEXT)
+                .positiveText("提交").positiveColor(getResources().getColor(R.color.colorPrimary))
+                .negativeText("取消").negativeColor(getResources().getColor(R.color.colorPrimary))
+                .input(null, null, false, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(MaterialDialog dialog, CharSequence input) {
+                        if (TextUtils.isEmpty(input)) {
+                            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
+                        } else {
+                            FeedbackAsyncTask feedbackAsyncTask = new FeedbackAsyncTask(AboutActivity.this, input.toString(), dialog);
+                            feedbackAsyncTask.execute();
+                        }
+                    }
+                }).show();
     }
 }

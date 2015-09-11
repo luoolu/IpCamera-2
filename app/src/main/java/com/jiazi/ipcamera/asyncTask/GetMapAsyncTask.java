@@ -10,11 +10,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -57,7 +57,7 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
     private List<BluetoothdeviceBean> mAlarmdeviceBeanList;
     private ArrayList<Integer> xPositions;
     private ArrayList<Integer> yPositions;
-    private LinearLayout mLinearLayout;
+    private CardView mCardView;
     private int topPos;
     private int bottomPos;
     private int leftPos;
@@ -68,13 +68,13 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
 
 
     public GetMapAsyncTask(Activity mActivity, ImageView mImageView, MaterialDialog dialog,
-                           ListView mListView, LayoutInflater mInflater, LinearLayout linearLayout) {
+                           ListView mListView, LayoutInflater mInflater, CardView mCardView) {
         this.mActivity = mActivity;
         this.mImageView = mImageView;
         mDialog = dialog;
         this.mListView = mListView;
         this.mLayoutInflater = mInflater;
-        mLinearLayout = linearLayout;
+        this.mCardView = mCardView;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
                 mDialog.dismiss();
             }
         }
-        mLinearLayout.setVisibility(View.VISIBLE);
+        mCardView.setVisibility(View.VISIBLE);
         DeviceAdapter mAdapter = new DeviceAdapter(mActivity, mBluetoothdeviceBeanList, mLayoutInflater);
         mListView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
@@ -326,7 +326,7 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
      * 从服务器获取蓝牙设备的信息
      */
     private void getBluetoothdevicePos(String weburl) {
-        String result = HttpUtil.connect(weburl);
+        String result = HttpUtil.getData(weburl);
         JSONObject object;
         if (result != null) {
             try {
@@ -366,7 +366,7 @@ public class GetMapAsyncTask extends AsyncTask<String, Void, Bitmap> {
      * 从服务器获取手环地图的图片地址
      */
     private URL getMapUrl() {
-        String result = HttpUtil.connect(ShowMapActivity.mapWeb);
+        String result = HttpUtil.getData(ShowMapActivity.mapWeb);
         JSONObject object;
         URL mapUrl = null;
         if (result != null) {

@@ -48,7 +48,7 @@ public class CancelAlertAsyncTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected Boolean doInBackground(String... strings) {
         String website = webHead + mac + webEnd;
-        String result = HttpUtil.connect(website);
+        String result = HttpUtil.getData(website);
         JSONObject object;
         if (result != null) {
             try {

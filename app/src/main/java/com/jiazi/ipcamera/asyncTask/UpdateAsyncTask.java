@@ -25,7 +25,6 @@ import org.json.JSONObject;
  */
 public class UpdateAsyncTask extends AsyncTask<String, Void, String> {
 
-    // APP管理地方址
     public static final String APP_ID = "2";// 数据库APP分配的ID
     public static final String API_TOKEN = "p5*d&z9-w8lq";// 加密字符
 
@@ -49,7 +48,7 @@ public class UpdateAsyncTask extends AsyncTask<String, Void, String> {
             String path = URL_UPDATE_APK + "&time=" + time + "&token="
                     + MD5Util.getMD5(time + API_TOKEN, 32) + "&app_id=" + APP_ID + "&version_code="
                     + versionCode;
-            return HttpUtil.connect(path);
+            return HttpUtil.getData(path);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -62,7 +61,6 @@ public class UpdateAsyncTask extends AsyncTask<String, Void, String> {
         if (result != null) {
             try {
                 JSONObject object = new JSONObject(result);
-
                 int code = object.getInt("code");
                 switch (code) {
                     case 104:              //有最新版本
@@ -78,7 +76,7 @@ public class UpdateAsyncTask extends AsyncTask<String, Void, String> {
                         if (mActivity != null) {
                             MaterialDialog.Builder builder = new MaterialDialog.Builder(mActivity);
                             builder.title("检查到新版本，是否立刻更新？")
-                                    .content("新版本:" + appBean.versionName + "\n" + appBean.content)
+                                    .content("新版本:" + appBean.versionName + "   " + appBean.size + "\n" + appBean.content)
                                     .positiveText("更新").positiveColor(mActivity.getResources().getColor(R.color.colorPrimary))
                                     .negativeText("取消").negativeColor(mActivity.getResources().getColor(R.color.colorPrimary))
                                     .neutralText("不再提醒").neutralColor(mActivity.getResources().getColor(R.color.colorPrimary))

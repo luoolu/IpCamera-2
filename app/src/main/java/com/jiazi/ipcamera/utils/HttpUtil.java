@@ -1,17 +1,20 @@
 package com.jiazi.ipcamera.utils;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * 用来建立Http连接到某个网站
+ * 网络连接帮助类
  */
 public class HttpUtil {
 
-    public static String connect(String webUrl) {
+    public static String getData(String webUrl) {
 
         HttpURLConnection connection = null;
         try {
@@ -42,5 +45,56 @@ public class HttpUtil {
                 connection.disconnect(); //中断连接
             }
         }
+    }
+
+    /**
+     * 发送Post请求到服务器
+     */
+    public static String postData(String path, String data) throws IOException {
+        // 提交数据到服务器
+        // 拼装路径
+        URL url = new URL(path);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(5000);
+        conn.setRequestMethod("POST");
+
+        // 准备数据
+        byte[] bytes = data.getBytes();
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//设置请求体的类型是文本类型
+        conn.setRequestProperty("Content-Length", bytes.length + "");//设置请求体的长度
+
+        // post 的方式实际上是浏览器把数据写给了浏览器
+        conn.setDoOutput(true);
+        OutputStream os = conn.getOutputStream();
+        os.write(bytes);
+
+        int code = conn.getResponseCode();
+        if (code == 200) {
+            // 请求成功
+            InputStream is = conn.getInputStream();
+            return HttpUtil.readInputStreaam(is);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Function  :   处理服务器的响应结果（将输入流转化成字符串）
+     * Param     :   inputStream服务器的响应输入流
+     */
+    public static String readInputStreaam(InputStream inputStream) {
+        String resultData = null;      //存储处理结果
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byte[] data = new byte[1024];
+        int len = 0;
+        try {
+            while ((len = inputStream.read(data)) != -1) {
+                byteArrayOutputStream.write(data, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        resultData = new String(byteArrayOutputStream.toByteArray());
+        return resultData;
     }
 }

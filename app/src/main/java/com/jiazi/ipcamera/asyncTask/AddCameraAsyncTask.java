@@ -39,7 +39,7 @@ public class AddCameraAsyncTask extends AsyncTask<String, Void, Boolean> {
         String nickname = camera.getNickname();
         String website = websiteHead + "&uid=" + uid + "&user=" + username + "&pwd=" + password
                 + "&remark=" + nickname;
-        String result = HttpUtil.connect(website);
+        String result = HttpUtil.getData(website);
         if (result != null) {
             try {
                 JSONObject object = new JSONObject(result);

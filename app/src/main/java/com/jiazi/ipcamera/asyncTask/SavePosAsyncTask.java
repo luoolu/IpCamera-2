@@ -2,8 +2,8 @@ package com.jiazi.ipcamera.asyncTask;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,11 +29,11 @@ public class SavePosAsyncTask extends AsyncTask<String, Void, Boolean> {
     private MaterialDialog loadDialog;
     private ListView mListView;
     private LayoutInflater mInflater;
-    private LinearLayout mLinearLayout;
+    private CardView mCardView;
 
     public SavePosAsyncTask(Activity mActivity, CameraManager cameraManager, String website,
                             ScaleImageView mScaleImageView, MaterialDialog loadDialog,
-                            ListView mListView, LayoutInflater mInflater, LinearLayout linearLayout) {
+                            ListView mListView, LayoutInflater mInflater, CardView mCardView) {
         this.mActivity = mActivity;
         mCameraManager = cameraManager;
         this.website = website;
@@ -41,12 +41,12 @@ public class SavePosAsyncTask extends AsyncTask<String, Void, Boolean> {
         this.loadDialog = loadDialog;
         this.mListView = mListView;
         this.mInflater = mInflater;
-        mLinearLayout = linearLayout;
+        this.mCardView = mCardView;
     }
 
     @Override
     protected Boolean doInBackground(String... strings) {
-        String result = HttpUtil.connect(website);
+        String result = HttpUtil.getData(website);
         JSONObject object;
         if (result != null) {
             try {
@@ -96,7 +96,7 @@ public class SavePosAsyncTask extends AsyncTask<String, Void, Boolean> {
              *  开启后台线程获取图片
              */
             GetMapAsyncTask getMapAsyncTask = new GetMapAsyncTask(mActivity, mScaleImageView,
-                    loadDialog, mListView, mInflater, mLinearLayout);     //后台线程获取图片
+                    loadDialog, mListView, mInflater, mCardView);     //后台线程获取图片
             getMapAsyncTask.execute();
         }
     }

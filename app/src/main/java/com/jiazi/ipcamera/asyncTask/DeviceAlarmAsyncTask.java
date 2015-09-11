@@ -60,7 +60,7 @@ public class DeviceAlarmAsyncTask extends AsyncTask<String, Void, Integer> {
      */
     @Override
     protected Integer doInBackground(String... strings) {
-        String result = HttpUtil.connect(website);
+        String result = HttpUtil.getData(website);
         JSONObject object;
         String uid;
         String mac;

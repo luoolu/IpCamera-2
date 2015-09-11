@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -57,7 +57,7 @@ public class ShowMapActivity extends AppCompatActivity {
     private UpdateReceiver mReceiver;
     private MaterialDialog progressDialog;
     private Toolbar mToolBar;
-    private LinearLayout listLinearLayout;
+    private CardView listCardView;
     private ListView mDeviceLv;
 
     private int isAuto = 1;      //0为手动更新    1为自动更新
@@ -90,7 +90,7 @@ public class ShowMapActivity extends AppCompatActivity {
         mToolBar.setTitle("甲子中心");
         setSupportActionBar(mToolBar);           //设置ToolBar为ActionBar
 
-        listLinearLayout = (LinearLayout) findViewById(R.id.ll_list);
+        listCardView = (CardView) findViewById(R.id.cardview_list);
         mDeviceLv = (ListView) findViewById(R.id.lv_deviceinfo);
 
         mImageView = (ScaleImageView) findViewById(R.id.div_main);
@@ -203,7 +203,7 @@ public class ShowMapActivity extends AppCompatActivity {
          * 开启线程获取摄像头的监控范围并且存储到数据库
          */
         SavePosAsyncTask savePosAsyncTask = new SavePosAsyncTask(this, mCameraManager,
-                CameraFragment.WEBSITE, mImageView, loadDialog, mDeviceLv, getLayoutInflater(), listLinearLayout);
+                CameraFragment.WEBSITE, mImageView, loadDialog, mDeviceLv, getLayoutInflater(), listCardView);
         savePosAsyncTask.execute();
 
     }

@@ -45,6 +45,23 @@
         <item name="sv_buttonText">我知道了</item>
     </style>
 
+    <style name="list_header_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#8A000000</item>
+    </style>
+
+    <style name="list_content_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#DE000000</item>
+    </style>
 </resources>
 
 

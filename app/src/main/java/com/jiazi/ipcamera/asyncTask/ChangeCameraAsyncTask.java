@@ -31,7 +31,7 @@ public class ChangeCameraAsyncTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected Boolean doInBackground(String... params) {
         String website = webHead + "&uid=" + uid + "&user=" + username + "&pwd=" + password;
-        String result = HttpUtil.connect(website);
+        String result = HttpUtil.getData(website);
         if (result != null) {
             try {
                 JSONObject object = new JSONObject(result);
