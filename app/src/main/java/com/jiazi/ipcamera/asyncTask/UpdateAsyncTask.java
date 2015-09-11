@@ -20,6 +20,8 @@ import com.jiazi.ipcamera.utils.MD5Util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 /**
  * 检查更新的线程
  */
@@ -73,10 +75,13 @@ public class UpdateAsyncTask extends AsyncTask<String, Void, String> {
                         appBean.content = data.getString("content");
                         appBean.size = Integer.parseInt(data.getString("size"));
                         appBean.fileName = data.getString("savename");
+                        float size = (float) appBean.size / (1024 * 1024);
+                        DecimalFormat df = new DecimalFormat("0.00"); // 保留两位小数
+                        String sizeText = df.format(size) + "MB";
                         if (mActivity != null) {
                             MaterialDialog.Builder builder = new MaterialDialog.Builder(mActivity);
                             builder.title("检查到新版本，是否立刻更新？")
-                                    .content("新版本:" + appBean.versionName + "   " + appBean.size + "\n" + appBean.content)
+                                    .content("新版本:" + appBean.versionName + "   " + sizeText + "\n" + appBean.content)
                                     .positiveText("更新").positiveColor(mActivity.getResources().getColor(R.color.colorPrimary))
                                     .negativeText("取消").negativeColor(mActivity.getResources().getColor(R.color.colorPrimary))
                                     .neutralText("不再提醒").neutralColor(mActivity.getResources().getColor(R.color.colorPrimary))

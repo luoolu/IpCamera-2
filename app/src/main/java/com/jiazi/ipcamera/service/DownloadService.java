@@ -16,6 +16,8 @@ import com.jiazi.ipcamera.activity.DownloadActivity;
 import com.jiazi.ipcamera.bean.AppBean;
 import com.jiazi.ipcamera.utils.UpdateThread;
 
+import java.text.DecimalFormat;
+
 /**
  * 后台下载服务
  */
@@ -75,7 +77,10 @@ public class DownloadService extends Service {
         notification.contentView.setTextViewText(R.id.tv_update_apk, title);
         notification.contentView.setTextViewText(R.id.tv_update_percent, "0%");
         notification.contentView.setProgressBar(R.id.pb_update_apk, max, progress, false);
-        notification.contentView.setTextViewText(R.id.tv_apk_size, (float) (size / (1024 * 1024)) + "MB");
+        float size1 = (float) size / (1024 * 1024);
+        DecimalFormat df = new DecimalFormat("0.00"); // 保留两位小数
+        String sizeText = df.format(size1);
+        notification.contentView.setTextViewText(R.id.tv_apk_size, sizeText + "MB");
         mNotificationManager.notify(NOTICE_ID, notification);
     }
 
