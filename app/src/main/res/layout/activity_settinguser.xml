@@ -12,7 +12,8 @@
         android:layout_width="fill_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#3F51B5"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:elevation="4dp">
 
         <ImageButton
             android:id="@+id/user_cancel"
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardElevation="8dp"
+            app:cardElevation="6dp"
             card_view:cardCornerRadius="10dp">
 
             <LinearLayout

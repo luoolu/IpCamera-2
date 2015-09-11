@@ -19,7 +19,8 @@
             style="@style/top_bg_style"
             android:layout_width="fill_parent"
             android:layout_height="?attr/actionBarSize"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:elevation="4dp">
 
             <ImageButton
                 android:id="@+id/date_cancel"
@@ -69,7 +70,7 @@
             android:scrollbars="none">
 
             <android.support.v7.widget.CardView
-                app:cardElevation="8dp"
+                app:cardElevation="6dp"
                 card_view:cardCornerRadius="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

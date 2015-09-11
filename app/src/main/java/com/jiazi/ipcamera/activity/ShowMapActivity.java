@@ -33,6 +33,7 @@ import com.jiazi.ipcamera.service.BridgeService;
 import com.jiazi.ipcamera.service.DownloadService;
 import com.jiazi.ipcamera.utils.AlarmManagerUtil;
 import com.jiazi.ipcamera.utils.CameraManager;
+import com.jiazi.ipcamera.utils.UpdateLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,7 @@ public class ShowMapActivity extends AppCompatActivity {
 
     private SharedPreferences mSharedPreferences;
     public static boolean autoUpdate;
+    public boolean showLogDialog;
 
     /**
      * 顶端、底端、左端、右端参数
@@ -81,10 +83,7 @@ public class ShowMapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_map);
 
         mContext = this;
-        topPos = new ArrayList<Integer>();
-        bottomPos = new ArrayList<Integer>();
-        leftPos = new ArrayList<Integer>();
-        rightPos = new ArrayList<Integer>();
+
         mAlarmManagerUtil = new AlarmManagerUtil(BROADCAST_MAP);
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar_start);
@@ -119,6 +118,15 @@ public class ShowMapActivity extends AppCompatActivity {
         mReceiver = new UpdateReceiver();
 
         mSharedPreferences = getSharedPreferences("SharedPreferences", Activity.MODE_PRIVATE);
+        showLogDialog = mSharedPreferences.getBoolean("log_dialog", true);
+        if (showLogDialog) {
+            UpdateLogUtils updateLogUtils = new UpdateLogUtils(this);
+            updateLogUtils.showUpdateLog();
+            showLogDialog = false;
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putBoolean("log_dialog", false);
+            editor.commit();
+        }
         autoUpdate = mSharedPreferences.getBoolean("auto_update", true);
         if (autoUpdate) {               //检查更新
             UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(this);
@@ -161,6 +169,10 @@ public class ShowMapActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        topPos = new ArrayList<Integer>();
+        bottomPos = new ArrayList<Integer>();
+        leftPos = new ArrayList<Integer>();
+        rightPos = new ArrayList<Integer>();
         mCameraManager = CameraManager.getInstance(this);
         loadPicture();                //接收到广播后加载手环地图
         initReceiver();

@@ -1,11 +1,10 @@
 <android.support.design.widget.CoordinatorLayout
-    android:id="@+id/main_start"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_start"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +18,8 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/MyToolbar"/>
+            app:theme="@style/MyToolbar"
+            android:elevation="4dp"/>
 
         <com.jiazi.ipcamera.customView.ScaleImageView
             android:id="@+id/div_main"

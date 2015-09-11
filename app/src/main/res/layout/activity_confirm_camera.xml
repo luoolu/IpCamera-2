@@ -11,6 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#3F51B5"
+        android:elevation="4dp"
         android:gravity="center_vertical">
 
         <ImageButton
@@ -74,6 +75,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                app:cardElevation="6dp"
                 >
 
                 <LinearLayout

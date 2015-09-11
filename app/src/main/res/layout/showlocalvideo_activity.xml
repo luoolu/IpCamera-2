@@ -48,7 +48,8 @@
         style="@style/top_bg_style"
         android:layout_width="fill_parent"
         android:layout_height="?attr/actionBarSize"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+        android:elevation="4dp">
 
         <ImageButton
             android:id="@+id/back"
@@ -140,7 +141,8 @@
             android:id="@+id/showbottom"
             android:layout_width="fill_parent"
             android:layout_height="65.0dip"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:elevation="4dp">
 
             <ProgressBar
                 android:id="@+id/progressBar1"

@@ -10,7 +10,8 @@
         style="@style/top_bg_style"
         android:layout_width="fill_parent"
         android:layout_height="?attr/actionBarSize"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+        android:elevation="4dp">
 
         <ImageButton
             android:id="@+id/back"

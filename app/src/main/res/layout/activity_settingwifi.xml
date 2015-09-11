@@ -17,7 +17,8 @@
             style="@style/top_bg_style"
             android:layout_width="fill_parent"
             android:layout_height="?attr/actionBarSize"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:elevation="4dp">
 
             <ImageButton
                 android:id="@+id/wifi_cancel"
@@ -57,7 +58,7 @@
             android:layout_margin="10dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:visibility="visible"
-            app:cardElevation="8dp"
+            app:cardElevation="6dp"
             card_view:cardCornerRadius="10dp">
 
             <LinearLayout
@@ -132,7 +133,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:visibility="gone"
-                app:cardElevation="8dp"
+                app:cardElevation="6dp"
                 card_view:cardCornerRadius="10dp">
 
                 <ListView

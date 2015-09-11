@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -50,7 +49,6 @@ public class UpdateAsyncTask extends AsyncTask<String, Void, String> {
             String path = URL_UPDATE_APK + "&time=" + time + "&token="
                     + MD5Util.getMD5(time + API_TOKEN, 32) + "&app_id=" + APP_ID + "&version_code="
                     + versionCode;
-            Log.i("UpdateAsyncTask", path);
             return HttpUtil.connect(path);
         } catch (Exception e) {
             e.printStackTrace();
