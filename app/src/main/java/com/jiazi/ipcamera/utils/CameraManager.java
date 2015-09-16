@@ -14,7 +14,7 @@ import java.util.List;
  * 管理CamaraBean以及数据库的实体类
  */
 public class CameraManager {
-    private String table_name = Msg.TABLE_CAMERA;     //表名
+    private String table_name = "camera";     //表名
 
     private static CameraManager mCameraManager = null;
     private static DatabaseUtil.DBHelper helper = null;

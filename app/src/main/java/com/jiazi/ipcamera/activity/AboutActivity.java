@@ -3,7 +3,6 @@ package com.jiazi.ipcamera.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -96,8 +95,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 updateLogUtils.showUpdateLog();
                 break;
             case R.id.ll_website:
-                Uri uri = Uri.parse("http://www.jiazi-it.com/");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);         //跳转到网页
+                Intent intent = new Intent(AboutActivity.this, WebActivity.class);         //跳转到网页
                 startActivity(intent);
                 break;
             case R.id.ll_update_version:

@@ -238,5 +238,6 @@
     <string name="login">登录</string>
     <string name="title_activity_download">DownloadActivity</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_web">WebActivity</string>
 
 </resources>

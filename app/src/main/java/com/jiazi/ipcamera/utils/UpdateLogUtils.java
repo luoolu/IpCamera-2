@@ -14,7 +14,6 @@ import com.jiazi.ipcamera.R;
 public class UpdateLogUtils {
     private String UPDATE_LOG = "";
     private int currentVersion;
-    private MaterialDialog mMaterialDialog;
     private Context mContext;
 
     public UpdateLogUtils(Context context) {
@@ -23,8 +22,7 @@ public class UpdateLogUtils {
 
     public void showUpdateLog() {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(mContext);
-        mMaterialDialog = builder
-                .title("更新日志")
+        builder.title("更新日志")
                 .content(getUpdateLog())
                 .positiveText("确定").positiveColor(mContext.getResources().getColor(R.color.colorPrimary))
                 .show();
