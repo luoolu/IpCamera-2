@@ -62,6 +62,10 @@ public class UpdateLogUtils {
                 break;
             case 182:
                 versionName = "Version 1.8.2";
+                break;
+            case 183:
+                versionName = "Version 1.8.3";
+                break;
             default:
                 break;
         }
@@ -85,6 +89,11 @@ public class UpdateLogUtils {
                 updateLog = "1.更新完显示更新日志\n" +
                         "2.增添意见反馈功能\n" +
                         "3.一些UI变化及BUG修复\n";
+                break;
+            case 183:
+                updateLog = "1.在应用内部打开公司网站\n" +
+                        "2.一些小更改\n";
+                break;
             default:
                 break;
         }
