@@ -63,8 +63,7 @@ public class HttpUtil {
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//设置请求体的类型是文本类型
         conn.setRequestProperty("Content-Length", bytes.length + "");//设置请求体的长度
 
-        // post 的方式实际上是浏览器把数据写给了浏览器
-        conn.setDoOutput(true);
+        conn.setDoOutput(true);        //设置为输出
         OutputStream os = conn.getOutputStream();
         os.write(bytes);
 
