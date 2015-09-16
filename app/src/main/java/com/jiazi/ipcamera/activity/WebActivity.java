@@ -49,7 +49,7 @@ public class WebActivity extends AppCompatActivity {
                 }
             }
         });
-        mWebView.loadUrl("http://www.jiazi-it.com/");
+        mWebView.loadUrl(AboutActivity.companyWebsite);
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.jiazi.ipcamera.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +25,7 @@ import com.jiazi.ipcamera.utils.UpdateLogUtils;
 
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String companyWebsite = "http://www.jiazi-it.com/";
     private Toolbar mToolbar;
     private LinearLayout webLinearLayout;
     private LinearLayout logLinearLayout;
@@ -95,8 +98,14 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 updateLogUtils.showUpdateLog();
                 break;
             case R.id.ll_website:
-                Intent intent = new Intent(AboutActivity.this, WebActivity.class);         //跳转到网页
-                startActivity(intent);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {  //判断安卓版本是否小于4.2.2
+                    Uri uri = Uri.parse(companyWebsite);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(AboutActivity.this, WebActivity.class);         //跳转到网页
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_update_version:
                 UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(this);
